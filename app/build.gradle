@@ -12,6 +12,7 @@ android {
         targetSdkVersion rootProject.ext.max_sdk_version
         versionCode rootProject.version_code
         versionName rootProject.version_name
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,6 +26,15 @@ android {
 
     dataBinding {
         enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -47,12 +57,25 @@ dependencies {
 
     // JetPack
     implementation "androidx.core:core-ktx:$rootProject.corektx_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycle_runtime_version"
+    implementation "androidx.activity:activity-ktx:$rootProject.activity_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.viewmodelktx_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.livedataktx_version"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
 
     // Picasso
     implementation "com.squareup.picasso:picasso:$rootProject.picasso_version"
+
+    // Multidex
+    implementation "androidx.multidex:multidex:$rootProject.multidex_version"
+
+    // Dagger
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger_version"
 
     // Unit tests
     testImplementation "junit:junit:$rootProject.junit_version"
