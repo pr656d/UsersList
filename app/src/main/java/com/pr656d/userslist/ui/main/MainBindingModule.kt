@@ -1,4 +1,4 @@
-package com.pr656d.userslist.ui
+package com.pr656d.userslist.ui.main
 
 import androidx.lifecycle.ViewModel
 import com.pr656d.userslist.di.ViewModelKey

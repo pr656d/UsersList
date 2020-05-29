@@ -1,3 +1,4 @@
 <resources>
-  <string name="app_name">UsersList</string>
+    <string name="app_name">UsersList</string>
+    <string name="profile_image_description">Profile image</string>
 </resources>

@@ -8,4 +8,6 @@ data class Street(
 
     @SerializedName("name")
     val name: String? = null
-)
+) {
+    override fun toString(): String = "$number, $name"
+}

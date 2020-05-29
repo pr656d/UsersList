@@ -27,4 +27,8 @@ data class Location (
     @SerializedName("timezone")
     @Embedded
     val timezone: Timezone? = null
-)
+) {
+    fun address(): String {
+        return "$street, $city, $postcode, $state, $country"
+    }
+}

@@ -1,4 +1,4 @@
-package com.pr656d.userslist.ui
+package com.pr656d.userslist.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels

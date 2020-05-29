@@ -1,7 +1,7 @@
 package com.pr656d.userslist.di
 
-import com.pr656d.userslist.ui.MainActivity
-import com.pr656d.userslist.ui.MainBindingModule
+import com.pr656d.userslist.ui.main.MainActivity
+import com.pr656d.userslist.ui.main.MainBindingModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

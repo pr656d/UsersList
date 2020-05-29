@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pr656d.userslist.databinding.ItemUserBinding
 import com.pr656d.userslist.model.User
-import com.pr656d.userslist.ui.MainViewModel
 
 class UserListAdapter(
     private val userListViewModel: MainViewModel
