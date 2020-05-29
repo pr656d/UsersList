@@ -25,6 +25,9 @@ class MainViewModelTest {
     @get:Rule
     var coroutineRule = MainCoroutineRule()
 
+    /**
+     * Verify that list is loaded.
+     */
     @Test
     fun verifyListIsLoaded() = coroutineRule.runBlockingTest {
         val userRepository = object : FakeUserRepository() {

@@ -8,6 +8,9 @@ import androidx.databinding.BindingAdapter
 import com.pr656d.userslist.R
 import com.squareup.picasso.Picasso
 
+/**
+ * Load image into [imageView] from the [imageUri].
+ */
 @BindingAdapter(value = ["imageUri"], requireAll = false)
 fun imageUri(imageView: ImageView, imageUri: Uri?) {
     when (imageUri) {
@@ -24,6 +27,9 @@ fun imageUri(imageView: ImageView, imageUri: Uri?) {
     }
 }
 
+/**
+ * Load image into [imageView] from the [imageUrl].
+ */
 @BindingAdapter(value = ["imageUrl"], requireAll = false)
 fun imageUrl(imageView: ImageView, imageUrl: String?) {
     imageUri(imageView, imageUrl?.toUri())

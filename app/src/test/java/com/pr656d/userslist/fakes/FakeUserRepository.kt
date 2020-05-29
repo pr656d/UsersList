@@ -17,7 +17,7 @@ open class FakeUserRepository(
         return fakeAppDatabase.userDao().getAll()
     }
 
-    override suspend fun loadFromDataSource() { }
+    override suspend fun updateData() { }
 
     override suspend fun clear() {}
 }

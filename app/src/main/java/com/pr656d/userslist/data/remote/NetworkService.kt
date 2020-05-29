@@ -12,6 +12,10 @@ import javax.inject.Singleton
 @Singleton
 interface NetworkService {
 
+    /**
+     * Fetch the users and
+     * @return [UserResponse].
+     */
     @GET(UserEndPoints.USERS)
     suspend fun getUsers(): UserResponse
 

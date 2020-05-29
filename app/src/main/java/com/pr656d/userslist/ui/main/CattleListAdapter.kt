@@ -35,8 +35,13 @@ class UserListViewHolder(
 }
 
 object UserDiff : DiffUtil.ItemCallback<User>() {
+    /**
+     * As data is reloaded every time app launches comparing [User.primaryKey] will be always different.
+     *
+     * Instead compare [User.id] which is returned from the server.
+     */
     override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
-        oldItem.primaryKey == newItem.primaryKey
+        oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: User, newItem: User): Boolean = oldItem == newItem
 }

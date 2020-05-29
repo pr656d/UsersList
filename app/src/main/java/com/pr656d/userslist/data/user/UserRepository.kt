@@ -11,12 +11,26 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 interface UserRepository {
+    /**
+     * Suspending which inserts the list of user into db.
+     */
     suspend fun insertAll(userList: List<User>): List<Long>
 
+    /**
+     * Get all the users as Flow.
+     */
     fun getAll(): Flow<List<User>>
 
-    suspend fun loadFromDataSource()
+    /**
+     * 1. Load data from the data source.
+     * 2. Clear the local data on response.
+     * 3. Add new data into local database.
+     */
+    suspend fun updateData()
 
+    /**
+     * Clear the user data.
+     */
     suspend fun clear()
 }
 
@@ -24,6 +38,11 @@ class UserDataRepository @Inject constructor(
     private val userDao: UserDao,
     private val networkService: NetworkService
 ) : UserRepository {
+
+    /**
+     *  Coroutines launched in this scope will not cancel on one of them gets failed
+     *  as we are using [SupervisorJob].
+     */
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     override suspend fun insertAll(userList: List<User>): List<Long> {
@@ -34,12 +53,12 @@ class UserDataRepository @Inject constructor(
         // Start fetching data from data source.
         // Launch a new coroutine. We don't want to wait for response.
         scope.launch {
-            loadFromDataSource()
+            updateData()
         }
         return userDao.getAll()
     }
 
-    override suspend fun loadFromDataSource() {
+    override suspend fun updateData() {
         val response = networkService.getUsers()
         // Clear the table.
         clear()
