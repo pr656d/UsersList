@@ -83,7 +83,9 @@ dependencies {
     // Unit tests
     testImplementation "junit:junit:$rootProject.junit_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.test_ext_version"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.archtesting_version"
 
     // Instrumentation tests
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
 }
