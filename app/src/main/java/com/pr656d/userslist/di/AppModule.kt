@@ -3,9 +3,12 @@ package com.pr656d.userslist.di
 import android.content.Context
 import com.pr656d.userslist.UsersListApplication
 import com.pr656d.userslist.data.db.AppDatabase
+import com.pr656d.userslist.data.db.dao.UserDao
 import com.pr656d.userslist.data.remote.EndPoints
 import com.pr656d.userslist.data.remote.NetworkService
 import com.pr656d.userslist.data.remote.Networking
+import com.pr656d.userslist.data.user.UserDataRepository
+import com.pr656d.userslist.data.user.UserRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -25,6 +28,11 @@ class AppModule {
 
     @Provides
     fun provideUserDao(appDatabase: AppDatabase) = appDatabase.userDao()
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(userDao: UserDao, networkService: NetworkService): UserRepository =
+        UserDataRepository(userDao, networkService)
 
     @Provides
     @Singleton

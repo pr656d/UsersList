@@ -11,4 +11,6 @@ data class Name(
 
     @SerializedName("last")
     val last: String? = null
-)
+) {
+    override fun toString(): String = "$title $first $last"
+}

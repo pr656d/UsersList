@@ -1,7 +1,9 @@
 package com.pr656d.userslist.data.remote
 
+import com.pr656d.userslist.BuildConfig
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
@@ -17,6 +19,14 @@ object Networking {
             .client(
                 OkHttpClient.Builder()
                     .cache(Cache(cacheDir, cacheSize))
+                    .addInterceptor(
+                        HttpLoggingInterceptor()
+                            .apply {
+                                level = if (BuildConfig.DEBUG)
+                                    HttpLoggingInterceptor.Level.BASIC
+                                else
+                                    HttpLoggingInterceptor.Level.NONE
+                            })
                     .readTimeout(NETWORK_CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
                     .writeTimeout(NETWORK_CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
                     .build()

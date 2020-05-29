@@ -18,7 +18,7 @@ data class Location (
     val country: String? = null,
 
     @SerializedName("postcode")
-    val postcode: Int? = null,
+    val postcode: String? = null,
 
     @SerializedName("coordinates")
     @Embedded
