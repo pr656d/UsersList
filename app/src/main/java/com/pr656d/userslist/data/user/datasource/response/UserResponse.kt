@@ -1,8 +1,10 @@
-package com.pr656d.userslist.model
+package com.pr656d.userslist.data.user.datasource.response
 
 import com.google.gson.annotations.SerializedName
+import com.pr656d.userslist.model.Info
+import com.pr656d.userslist.model.User
 
-data class Result (
+data class UserResponse (
     @SerializedName("results")
     val results: List<User>? = null,
 

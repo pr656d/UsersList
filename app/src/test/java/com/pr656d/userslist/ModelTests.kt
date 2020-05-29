@@ -2,7 +2,7 @@ package com.pr656d.userslist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.gson.Gson
-import com.pr656d.userslist.model.Result
+import com.pr656d.userslist.data.user.datasource.response.UserResponse
 import com.pr656d.userslist.model.User
 import junit.framework.Assert.assertNotNull
 import org.junit.Rule
@@ -144,6 +144,6 @@ class UserJsonTests {
                 "    }\n" +
                 "}"
 
-        assertNotNull(Gson().fromJson(resultStr, Result::class.java))
+        assertNotNull(Gson().fromJson(resultStr, UserResponse::class.java))
     }
 }

@@ -23,6 +23,7 @@ buildscript {
         livedataktx_version = "2.2.0"
         material_version = "1.1.0"
         multidex_version = "2.0.1"
+        okhttp_version = "4.7.2"
         picasso_version = "2.71828"
         room_version = "2.2.5"
         retrofit_version = "2.9.0"

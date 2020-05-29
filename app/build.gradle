@@ -64,6 +64,8 @@ dependencies {
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
 
     // Picasso
     implementation "com.squareup.picasso:picasso:$rootProject.picasso_version"

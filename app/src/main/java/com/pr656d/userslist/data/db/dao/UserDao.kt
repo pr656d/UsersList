@@ -1,4 +1,4 @@
-package com.pr656d.userslist.data.dao
+package com.pr656d.userslist.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
