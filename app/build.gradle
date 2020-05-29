@@ -62,6 +62,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.viewmodelktx_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.livedataktx_version"
 
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutine_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutine_version"
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
@@ -87,6 +92,9 @@ dependencies {
     testImplementation "junit:junit:$rootProject.junit_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.test_ext_version"
     testImplementation "androidx.arch.core:core-testing:$rootProject.archtesting_version"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockito_version"
+    testImplementation "com.nhaarman:mockito-kotlin:$rootProject.mockitoKotlin_version"
+    testImplementation "org.hamcrest:hamcrest-library:$rootProject.hamcrest_version"
 
     // Instrumentation tests
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
