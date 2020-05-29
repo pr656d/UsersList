@@ -1,9 +1,11 @@
 package com.pr656d.userslist.model
 
+import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
 
 data class Location (
     @SerializedName("street")
+    @Embedded
     val street: Street? = null,
 
     @SerializedName("city")
@@ -19,8 +21,10 @@ data class Location (
     val postcode: Int? = null,
 
     @SerializedName("coordinates")
+    @Embedded
     val coordinates: Coordinates? = null,
 
     @SerializedName("timezone")
+    @Embedded
     val timezone: Timezone? = null
 )
