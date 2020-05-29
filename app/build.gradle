@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compile_sdk_version
+
+    defaultConfig {
+        applicationId "com.pr656d.userslist"
+        minSdkVersion rootProject.ext.min_sdk_version
+        targetSdkVersion rootProject.ext.max_sdk_version
+        versionCode rootProject.version_code
+        versionName rootProject.version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlin_version"
+
+    // Architecture components
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_version"
+    implementation "androidx.room:room-runtime:$rootProject.room_version"
+    implementation "androidx.room:room-ktx:$rootProject.room_version"
+    kapt "androidx.room:room-compiler:$rootProject.room_version"
+
+    // UI
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompat_version"
+    implementation "com.google.android.material:material:$rootProject.material_version"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.supportlibrary_version"
+
+    // JetPack
+    implementation "androidx.core:core-ktx:$rootProject.corektx_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$rootProject.picasso_version"
+
+    // Unit tests
+    testImplementation "junit:junit:$rootProject.junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.test_ext_version"
+
+    // Instrumentation tests
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
+}
