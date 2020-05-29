@@ -20,4 +20,7 @@ class AppModule {
     @Provides
     fun provideDatabase(context: Context) = AppDatabase.buildDatabase(context)
 
+    @Provides
+    fun provideUserDao(appDatabase: AppDatabase) = appDatabase.userDao()
+
 }
