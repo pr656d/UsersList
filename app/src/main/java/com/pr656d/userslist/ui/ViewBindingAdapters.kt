@@ -1,12 +1,18 @@
 package com.pr656d.userslist.ui
 
 import android.net.Uri
+import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.pr656d.userslist.R
 import com.squareup.picasso.Picasso
+
+@BindingAdapter("goneUnless")
+fun goneUnless(view: View, visible: Boolean) {
+    view.visibility = if (visible) View.VISIBLE else View.GONE
+}
 
 /**
  * Load image into [imageView] from the [imageUri].

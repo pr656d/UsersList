@@ -31,5 +31,22 @@
             tools:itemCount="20"
             tools:listitem="@layout/item_user" />
 
+
+        <TextView
+            android:id="@+id/emptyListMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_large"
+            android:text="@string/users_list_empty"
+            android:textAlignment="center"
+            android:textColor="?android:textColorHint"
+            android:textSize="20sp"
+            app:goneUnless="@{ viewModel.isEmpty }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

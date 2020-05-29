@@ -1,5 +1,6 @@
 package com.pr656d.userslist.data.user
 
+import android.util.Log
 import com.pr656d.userslist.data.db.dao.UserDao
 import com.pr656d.userslist.data.remote.NetworkService
 import com.pr656d.userslist.model.User
@@ -8,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 interface UserRepository {
@@ -39,6 +41,10 @@ class UserDataRepository @Inject constructor(
     private val networkService: NetworkService
 ) : UserRepository {
 
+    companion object {
+        const val TAG = "UserDataRepository"
+    }
+
     /**
      *  Coroutines launched in this scope will not cancel on one of them gets failed
      *  as we are using [SupervisorJob].
@@ -53,7 +59,13 @@ class UserDataRepository @Inject constructor(
         // Start fetching data from data source.
         // Launch a new coroutine. We don't want to wait for response.
         scope.launch {
-            updateData()
+            try {
+                // Error will be thrown also when internet is not available.
+                // Try to fetch the data.
+                updateData()
+            } catch (e: Exception) {
+                Log.d(TAG, "Could not update user data : ${e.message}")
+            }
         }
         return userDao.getAll()
     }
