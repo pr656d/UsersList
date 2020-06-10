@@ -1,47 +1,30 @@
 package com.pr656d.userslist.di
 
-import android.content.Context
-import com.pr656d.userslist.UsersListApplication
 import com.pr656d.userslist.data.db.AppDatabase
-import com.pr656d.userslist.data.db.dao.UserDao
 import com.pr656d.userslist.data.remote.EndPoints
-import com.pr656d.userslist.data.remote.NetworkService
 import com.pr656d.userslist.data.remote.Networking
 import com.pr656d.userslist.data.user.UserDataRepository
 import com.pr656d.userslist.data.user.UserRepository
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
+import org.koin.experimental.builder.singleBy
 
 /**
  * Defines all the classes that need to be provided in the scope of the app.
- * If they are singleton mark them as '@Singleton'.
  */
-@Module
-class AppModule {
-    @Provides
-    fun provideContext(application: UsersListApplication): Context = application.applicationContext
+@JvmField
+val appModule = module {
+    single { AppDatabase.buildDatabase(get()) }
 
-    @Singleton
-    @Provides
-    fun provideDatabase(context: Context) = AppDatabase.buildDatabase(context)
+    factory { get<AppDatabase>().userDao() }
 
-    @Provides
-    fun provideUserDao(appDatabase: AppDatabase) = appDatabase.userDao()
+    singleBy<UserRepository, UserDataRepository>()
 
-    @Singleton
-    @Provides
-    fun provideUserRepository(userDao: UserDao, networkService: NetworkService): UserRepository =
-        UserDataRepository(userDao, networkService)
-
-    @Provides
-    @Singleton
-    fun provideNetworkService(
-        application: UsersListApplication
-    ): NetworkService =
+    single {
         Networking.create(
             EndPoints.BASE_URL,
-            application.cacheDir,
+            androidContext().cacheDir,
             10 * 1024 * 1024 // 10MB
         )
+    }
 }

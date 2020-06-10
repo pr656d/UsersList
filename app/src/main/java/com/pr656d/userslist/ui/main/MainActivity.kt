@@ -1,19 +1,15 @@
 package com.pr656d.userslist.ui.main
 
 import android.os.Bundle
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.pr656d.userslist.R
 import com.pr656d.userslist.databinding.ActivityMainBinding
-import dagger.android.support.DaggerAppCompatActivity
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private val model by viewModels<MainViewModel> { viewModelFactory }
+    private val model by viewModel<MainViewModel>()
 
     private lateinit var binding: ActivityMainBinding
 

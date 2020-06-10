@@ -10,7 +10,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.lang.Exception
-import javax.inject.Inject
 
 interface UserRepository {
     /**
@@ -36,7 +35,7 @@ interface UserRepository {
     suspend fun clear()
 }
 
-class UserDataRepository @Inject constructor(
+class UserDataRepository(
     private val userDao: UserDao,
     private val networkService: NetworkService
 ) : UserRepository {

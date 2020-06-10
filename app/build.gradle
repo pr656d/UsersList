@@ -79,11 +79,10 @@ dependencies {
     // Multidex
     implementation "androidx.multidex:multidex:$rootProject.multidex_version"
 
-    // Dagger
-    implementation "com.google.dagger:dagger-android:$rootProject.dagger_version"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger_version"
+    // Koin
+    implementation "org.koin:koin-androidx-scope:$rootProject.koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$rootProject.koin_version"
+    implementation "org.koin:koin-androidx-ext:$rootProject.koin_version"
 
     // Gson
     implementation "com.google.code.gson:gson:$rootProject.gson_version"

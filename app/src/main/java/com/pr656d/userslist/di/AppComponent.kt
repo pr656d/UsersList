@@ -1,27 +1,11 @@
 package com.pr656d.userslist.di
 
-import com.pr656d.userslist.UsersListApplication
-import dagger.BindsInstance
-import dagger.Component
-import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
-import javax.inject.Singleton
+import org.koin.core.module.Module
 
 /**
  * Main component of the app, created and persisted in the Application level.
+ * Consists all the modules of the app.
  */
-@Singleton
-@Component(
-    modules = [
-        AndroidSupportInjectionModule::class,
-        ActivityBindingModule::class,
-        AppModule::class,
-        ViewModelModule::class
-    ]
-)
-interface AppComponent : AndroidInjector<UsersListApplication> {
-    @Component.Factory
-    interface Factory {
-        fun create(@BindsInstance application: UsersListApplication): AppComponent
-    }
+val appComponent: List<Module> = mutableListOf(appModule).apply {
+    addAll(activityBindingModule)
 }
