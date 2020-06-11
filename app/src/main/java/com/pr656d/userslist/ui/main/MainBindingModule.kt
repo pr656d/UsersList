@@ -8,5 +8,7 @@ import org.koin.dsl.module
  */
 @JvmField
 val mainBindingModule = module {
-    viewModel<MainViewModel>()
+    scope<MainActivity> {
+         viewModel<MainViewModel>()
+    }
 }

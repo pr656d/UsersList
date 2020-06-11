@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.pr656d.userslist.R
 import com.pr656d.userslist.databinding.ActivityMainBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.scope.lifecycleScope
+import org.koin.androidx.viewmodel.scope.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val model by viewModel<MainViewModel>()
+    private val model by lifecycleScope.viewModel<MainViewModel>(this)
 
     private lateinit var binding: ActivityMainBinding
 
