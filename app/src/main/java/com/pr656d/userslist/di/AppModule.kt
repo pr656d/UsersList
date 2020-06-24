@@ -11,6 +11,8 @@ import com.pr656d.userslist.data.user.UserDataRepository
 import com.pr656d.userslist.data.user.UserRepository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Singleton
 
 /**
@@ -18,6 +20,7 @@ import javax.inject.Singleton
  * If they are singleton mark them as '@Singleton'.
  */
 @Module
+@InstallIn(ApplicationComponent::class)
 class AppModule {
     @Provides
     fun provideContext(application: UsersListApplication): Context = application.applicationContext

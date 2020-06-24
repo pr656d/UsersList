@@ -1,19 +1,19 @@
 package com.pr656d.userslist.ui.main
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.pr656d.userslist.data.user.UserRepository
 import com.pr656d.userslist.model.User
-import javax.inject.Inject
 
 /**
  * For simplicity using [UserRepository] directly.
  * We should add one more layer between [ViewModel] and [UserRepository]
  * which executes tasks in background.
  */
-class MainViewModel @Inject constructor(
+class MainViewModel @ViewModelInject constructor(
     repository: UserRepository
 ) : ViewModel() {
 
