@@ -1,9 +1,14 @@
 package com.pr656d.userslist.data.user
 
 import android.util.Log
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.pr656d.userslist.data.db.dao.UserDao
 import com.pr656d.userslist.data.remote.NetworkService
 import com.pr656d.userslist.model.User
+import com.pr656d.userslist.workmanager.RefreshUsersWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -32,6 +37,11 @@ interface UserRepository {
     suspend fun updateData()
 
     /**
+     * Schedule a WorkManager worker to update data.
+     */
+    fun scheduleUpdateDataWorker()
+
+    /**
      * Clear the user data.
      */
     suspend fun clear()
@@ -40,7 +50,8 @@ interface UserRepository {
 @Singleton
 class UserDataRepository @Inject constructor(
     private val userDao: UserDao,
-    private val networkService: NetworkService
+    private val networkService: NetworkService,
+    private val workManager: WorkManager
 ) : UserRepository {
 
     companion object {
@@ -59,16 +70,8 @@ class UserDataRepository @Inject constructor(
 
     override fun getAll(): Flow<List<User>> {
         // Start fetching data from data source.
-        // Launch a new coroutine. We don't want to wait for response.
-        scope.launch {
-            try {
-                // Error will be thrown also when internet is not available.
-                // Try to fetch the data.
-                updateData()
-            } catch (e: Exception) {
-                Log.d(TAG, "Could not update user data : ${e.message}")
-            }
-        }
+        // Schedule a worker. We don't want to wait for response.
+        scheduleUpdateDataWorker()
         return userDao.getAll()
     }
 
@@ -80,6 +83,18 @@ class UserDataRepository @Inject constructor(
         response.results?.let {
             userDao.insertAll(it)
         }
+    }
+
+    override fun scheduleUpdateDataWorker() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val workRequest = OneTimeWorkRequestBuilder<RefreshUsersWorker>()
+            .setConstraints(constraints)
+            .build()
+
+        workManager.enqueue(workRequest)
     }
 
     override suspend fun clear() {

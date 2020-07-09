@@ -1,7 +1,7 @@
 package com.pr656d.userslist.di
 
 import android.content.Context
-import com.pr656d.userslist.UsersListApplication
+import androidx.work.WorkManager
 import com.pr656d.userslist.data.db.AppDatabase
 import com.pr656d.userslist.data.db.dao.UserDao
 import com.pr656d.userslist.data.remote.EndPoints
@@ -26,15 +26,19 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context) = AppDatabase.buildDatabase(context)
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase = AppDatabase.buildDatabase(context)
 
     @Provides
-    fun provideUserDao(appDatabase: AppDatabase) = appDatabase.userDao()
+    fun provideUserDao(appDatabase: AppDatabase): UserDao = appDatabase.userDao()
 
     @Singleton
     @Provides
-    fun provideUserRepository(userDao: UserDao, networkService: NetworkService): UserRepository =
-        UserDataRepository(userDao, networkService)
+    fun provideUserRepository(
+        userDao: UserDao,
+        networkService: NetworkService,
+        workManager: WorkManager
+    ): UserRepository =
+        UserDataRepository(userDao, networkService, workManager)
 
     @Singleton
     @Provides
@@ -46,4 +50,9 @@ class AppModule {
             context.cacheDir,
             10 * 1024 * 1024 // 10MB
         )
+
+    @Provides
+    fun provideWorkManager(@ApplicationContext context: Context): WorkManager {
+        return WorkManager.getInstance(context)
+    }
 }
