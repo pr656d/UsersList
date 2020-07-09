@@ -13,6 +13,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
 
 /**
@@ -22,12 +23,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 class AppModule {
-    @Provides
-    fun provideContext(application: UsersListApplication): Context = application.applicationContext
 
     @Singleton
     @Provides
-    fun provideDatabase(context: Context) = AppDatabase.buildDatabase(context)
+    fun provideDatabase(@ApplicationContext context: Context) = AppDatabase.buildDatabase(context)
 
     @Provides
     fun provideUserDao(appDatabase: AppDatabase) = appDatabase.userDao()
@@ -37,14 +36,14 @@ class AppModule {
     fun provideUserRepository(userDao: UserDao, networkService: NetworkService): UserRepository =
         UserDataRepository(userDao, networkService)
 
-    @Provides
     @Singleton
+    @Provides
     fun provideNetworkService(
-        application: UsersListApplication
+        @ApplicationContext context: Context
     ): NetworkService =
         Networking.create(
             EndPoints.BASE_URL,
-            application.cacheDir,
+            context.cacheDir,
             10 * 1024 * 1024 // 10MB
         )
 }

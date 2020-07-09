@@ -82,9 +82,9 @@ dependencies {
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$rootProject.hilt_version"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$rootProject.hilt_viewmodel_version"
     kapt "com.google.dagger:hilt-android-compiler:$rootProject.hilt_version"
-    kapt "androidx.hilt:hilt-compiler:$rootProject.hilt_version"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hilt_androidx_compiler"
 
     // Gson
     implementation "com.google.code.gson:gson:$rootProject.gson_version"

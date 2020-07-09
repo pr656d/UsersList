@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface UserRepository {
     /**
@@ -36,6 +37,7 @@ interface UserRepository {
     suspend fun clear()
 }
 
+@Singleton
 class UserDataRepository @Inject constructor(
     private val userDao: UserDao,
     private val networkService: NetworkService
