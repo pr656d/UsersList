@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion rootProject.ext.compile_sdk_version
@@ -23,10 +22,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-
-    dataBinding {
-        enabled = true
     }
 
     compileOptions {
@@ -60,17 +55,8 @@ dependencies {
     implementation "androidx.core:core-ktx:$rootProject.corektx_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycle_runtime_version"
     implementation "androidx.activity:activity-ktx:$rootProject.activity_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.viewmodelktx_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.livedataktx_version"
 
-    // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutine_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutine_version"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutine_version"
-
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+    // Okhttp
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
@@ -80,16 +66,11 @@ dependencies {
     // Multidex
     implementation "androidx.multidex:multidex:$rootProject.multidex_version"
 
-    // Hilt
-    implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$rootProject.hilt_viewmodel_version"
-    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hilt_version"
-    kapt "androidx.hilt:hilt-compiler:$rootProject.hilt_androidx_compiler"
-
     // Work Manager
     implementation "androidx.work:work-runtime-ktx:$rootProject.workmanager_version"
-    implementation "androidx.hilt:hilt-work:$rootProject.hilt_workmanager_version"
-    kapt "androidx.hilt:hilt-compiler:$rootProject.hilt_workmanager_version"
+
+    // Fast networking
+    implementation "com.amitshekhar.android:android-networking:$rootProject.fast_networking_version"
 
     // Gson
     implementation "com.google.code.gson:gson:$rootProject.gson_version"
@@ -97,10 +78,6 @@ dependencies {
     // Unit tests
     testImplementation "junit:junit:$rootProject.junit_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.test_ext_version"
-    testImplementation "androidx.arch.core:core-testing:$rootProject.archtesting_version"
-    testImplementation "org.mockito:mockito-core:$rootProject.mockito_version"
-    testImplementation "com.nhaarman:mockito-kotlin:$rootProject.mockitoKotlin_version"
-    testImplementation "org.hamcrest:hamcrest-library:$rootProject.hamcrest_version"
 
     // Instrumentation tests
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"

@@ -2,18 +2,22 @@ package com.pr656d.userslist
 
 import android.app.Application
 import android.util.Log
-import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
-import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
+import com.pr656d.userslist.utils.helper.NetworkHelper
 
-@HiltAndroidApp
 class UsersListApplication : Application(), Configuration.Provider {
-    @Inject lateinit var workerFactory: HiltWorkerFactory
+    override fun onCreate() {
+        super.onCreate()
+        setupNetworking()
+    }
 
-    override fun getWorkManagerConfiguration() =
-        Configuration.Builder()
-            .setWorkerFactory(workerFactory)
-            .setMinimumLoggingLevel(Log.DEBUG)
-            .build()
+    private fun setupNetworking() {
+        NetworkHelper.initialize(this)
+    }
+
+    override fun getWorkManagerConfiguration(): Configuration = Configuration.Builder()
+        .setMinimumLoggingLevel(
+            if (BuildConfig.DEBUG) Log.DEBUG else Log.INFO
+        )
+        .build()
 }

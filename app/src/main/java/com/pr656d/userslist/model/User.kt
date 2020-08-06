@@ -26,30 +26,12 @@ data class User(
     @Embedded(prefix = "login")
     val login: Login? = null,
 
-    @SerializedName("dob")
-    @Embedded(prefix = "dob")
-    val dob: Dob? = null,
-
-    @SerializedName("registered")
-    @Embedded(prefix = "registered")
-    val registered: Registered? = null,
-
     @SerializedName("phone")
     val phone: String? = null,
 
-    @SerializedName("cell")
-    val cell: String? = null,
-
-    @SerializedName("id")
-    @Embedded(prefix = "id")
-    val id: Id? = null,
-
     @SerializedName("picture")
     @Embedded(prefix = "picture")
-    val picture: Picture? = null,
-
-    @SerializedName("nat")
-    val nat: String? = null
+    val picture: Picture? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "primaryKey")

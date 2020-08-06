@@ -16,19 +16,17 @@ interface UserDao {
      * Insert the list of user data.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(userList: List<User>): List<Long>
+    fun insertAll(userList: List<User>): List<Long>
 
     /**
      * Get all user list.
-     *
-     * Internally room will handle it on background thread as it is returning Flow.
      */
     @Query("SELECT * FROM userList")
-    fun getAll(): Flow<List<User>>
+    fun getAll(): List<User>
 
     /**
      * Clears the table data.
      */
     @Query("DELETE FROM userList")
-    suspend fun clear()
+    fun clear()
 }
