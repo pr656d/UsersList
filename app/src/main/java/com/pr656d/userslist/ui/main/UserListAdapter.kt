@@ -36,17 +36,16 @@ class UserListViewHolder(
     private val address by lazy { view.findViewById<TextView>(R.id.address) }
 
     fun bind(data: User) {
+        name.text = data.name.toString()
+        address.text = data.location?.address()
         profileImage.apply {
             Picasso.get()
                 .load(data.picture?.medium)
                 .placeholder(R.drawable.image_placeholder)
-                .centerCrop()
                 .into(this)
             clipToOutline = true
             outlineProvider = CircularOutlineProvider
         }
-        name.text = data.name.toString()
-        address.text = data.location?.address()
     }
 }
 
