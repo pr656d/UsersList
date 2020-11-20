@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">UsersList</string>
-    <string name="profile_image_description">Profile image</string>
     <string name="users_list_empty">Users not available</string>
 </resources>

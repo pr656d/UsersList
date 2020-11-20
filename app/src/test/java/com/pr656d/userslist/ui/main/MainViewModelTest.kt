@@ -6,6 +6,7 @@ import com.pr656d.userslist.model.User
 import com.pr656d.userslist.rule.MainCoroutineRule
 import com.pr656d.userslist.rule.runBlockingTest
 import com.pr656d.userslist.util.LiveDataTestUtil
+import com.pr656d.userslist.viewmodel.MainViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf

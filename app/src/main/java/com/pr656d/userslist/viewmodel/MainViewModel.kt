@@ -1,4 +1,4 @@
-package com.pr656d.userslist.ui.main
+package com.pr656d.userslist.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -18,8 +18,5 @@ class MainViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     val users: LiveData<List<User>> = repository.getAll().asLiveData()
-
-    val isEmpty
-        get() = users.map { it.isNullOrEmpty() }
 
 }
